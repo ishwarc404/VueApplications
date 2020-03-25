@@ -5,8 +5,15 @@ import VueRouter from "vue-router";
 
 import HomePage from "./components/HomePage.vue"
 import AddMovies from "./components/AddMovies.vue"
-Vue.config.productionTip = false;
 
+//axios for sending and receiving data
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+    
+Vue.use(VueAxios, axios)
+   
+
+Vue.config.productionTip = false;
 Vue.use(VueRouter); //enabling routing
 
 const routes = [
