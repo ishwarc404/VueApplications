@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <v-container>
+    <v-container v-if="movieData !== null">
       <MovieCards v-bind:movieData="movieData" />
     </v-container>
   </v-app>
@@ -22,7 +22,7 @@ import NavBar from "./NavBar";
 import MovieCards from "./MovieCards";
 // import database from "./assets/db.json";
 import axios from "axios";
-let dataBaseReceived = {};
+// let dataBaseReceived = {};
 export default {
   name: "HomePage",
   components: {
@@ -32,21 +32,21 @@ export default {
 
   data() {
     return {
-      dataBaseReceived: {},
-      movieData: dataBaseReceived
+      // dataBaseReceived: {},
+      movieData: null
     };
   },
-  created() {
-    axios
-      .get("http://127.0.0.1:5000/readMovieData")
-      .then(function(response) {
-        dataBaseReceived = response.data;
-        console.log(dataBaseReceived);
-      })
-      .catch(function(error) {
-        // currentObj.output = error;
-        console.log(error);
-      });
+  async mounted() {
+    let output = await axios.get("http://127.0.0.1:5000/readMovieData");
+    this.movieData = output.data;
+    // .then(function(response) {
+    //   this.movieData = response.data;
+    //   // console.log(dataBaseReceived);
+    // })
+    // .catch(function(error) {
+    //   // currentObj.output = error;
+    //   console.log(error);
+    // });
   }
 };
 </script>
