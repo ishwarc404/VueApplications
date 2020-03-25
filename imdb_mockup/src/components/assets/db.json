@@ -1,0 +1,142 @@
+{
+  "actors": [
+    {
+      "id": 1,
+      "name": "SRK",
+      "sex": "M",
+      "dateOfBirth": "05/01/1979",
+      "bio": "I am SRK",
+      "movies": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Akshay Kumar",
+      "sex": "M",
+      "dateOfBirth": "03/09/1989",
+      "bio": "I am Akshay Kumar",
+      "movies": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Amitabh Bachchan",
+      "sex": "M",
+      "dateOfBirth": "02/25/1963",
+      "bio": "I am AB",
+      "movies": [
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "producers": [
+    {
+      "id": 1,
+      "name": "P1",
+      "sex": "M",
+      "dateOfBirth": "05/01/1979",
+      "bio": "I am p1",
+      "movies": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 2,
+      "name": "P2",
+      "sex": "M",
+      "dateOfBirth": "05/01/1979",
+      "bio": "I am p2",
+      "movies": [
+        2
+      ]
+    },
+    {
+      "id": 3,
+      "name": "P3",
+      "sex": "M",
+      "dateOfBirth": "05/01/1979",
+      "bio": "I am p3",
+      "movies": [
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "movies": [
+    {
+      "id": 1,
+      "name": "First Movie",
+      "yearOfRelease": "08/05/1989",
+      "plot": "Andy Dufresne, a successful banker, is arrested for the murders of his wife and her lover, and is sentenced to life imprisonment at the Shawshank prison. He becomes the most unconventional prisoner.",
+      "poster": "http://someurl.com/somePoster.jpg",
+      "actors": [
+        1,
+        2
+      ],
+      "producer": 1
+    },
+    {
+      "id": 2,
+      "name": "Second Movie",
+      "yearOfRelease": "08/05/1989",
+      "plot": "Andy Dufresne, a successful banker, is arrested for the murders of his wife and her lover, and is sentenced to life imprisonment at the Shawshank prison. He becomes the most unconventional prisoner.",
+      "poster": "http://someurl.com/somePoster.jpg",
+      "actors": [
+        1
+      ],
+      "producer": 2
+    },
+    {
+      "id": 3,
+      "name": "Third Movie",
+      "yearOfRelease": "08/05/1989",
+      "plot": "Andy Dufresne, a successful banker, is arrested for the murders of his wife and her lover, and is sentenced to life imprisonment at the Shawshank prison. He becomes the most unconventional prisoner.",
+      "poster": "http://someurl.com/somePoster.jpg",
+      "actors": [
+        2
+      ],
+      "producer": 1
+    },
+    {
+      "id": 4,
+      "name": "Fourth Movie",
+      "yearOfRelease": "08/05/1989",
+      "plot": "Andy Dufresne, a successful banker, is arrested for the murders of his wife and her lover, and is sentenced to life imprisonment at the Shawshank prison. He becomes the most unconventional prisoner.",
+      "poster": "http://someurl.com/somePoster.jpg",
+      "actors": [
+        3
+      ],
+      "producer": 3
+    },
+    {
+      "id": 5,
+      "name": "Fifth Movie",
+      "yearOfRelease": "08/05/1989",
+      "plot": "Andy Dufresne, a successful banker, is arrested for the murders of his wife and her lover, and is sentenced to life imprisonment at the Shawshank prison. He becomes the most unconventional prisoner.",
+      "poster": "http://someurl.com/somePoster.jpg",
+      "actors": [
+        3
+      ],
+      "producer": 3
+    },
+    {
+      "id": 6,
+      "name": "Sixth Movie",
+      "yearOfRelease": "08/05/1989",
+      "plot": "Andy Dufresne, a successful banker, is arrested for the murders of his wife and her lover, and is sentenced to life imprisonment at the Shawshank prison. He becomes the most unconventional prisoner.",
+      "poster": "http://someurl.com/somePoster.jpg",
+      "actors": [
+        3
+      ],
+      "producer": 3
+    }
+  ]
+}
