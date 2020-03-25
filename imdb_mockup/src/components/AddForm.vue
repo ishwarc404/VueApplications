@@ -24,7 +24,6 @@
       <v-btn color="" class="mr-4" @click="submitMovieData">
         Add Movie
       </v-btn>
-
     </v-form>
   </div>
 </template>
@@ -43,22 +42,25 @@ export default {
     submitMovieData() {
       //lets send all this data to the rest API
       let currentObj = this;
-      this.axios
-        .post("http://127.0.0.1:5000/addMovieData", {
-          movieName: this.movieName,
-          yearOfRelease: this.yearOfRelease,
-          plot: this.plot,
-          poster: this.poster
-        })
-        .then(function(response) {
-          currentObj.output = response.data;
-        })
-        .catch(function(error) {
-          currentObj.output = error;
-        });
+        this.axios
+          .post("http://127.0.0.1:5000/addMovieData", {
+            movieName: this.movieName,
+            yearOfRelease: this.yearOfRelease,
+            plot: this.plot,
+            poster: this.poster
+          })
+          .then(function(response) {
+            currentObj.output = response.data;
+          })
+          .catch(function(error) {
+            currentObj.output = error;
+          });
 
-    console.log("DONE")
-    //   this.$router.push("/"); //going back to home screen
+      console.log("DONE");
+
+  
+
+      //   this.$router.push("/"); //going back to home screen
     }
   }
 };
