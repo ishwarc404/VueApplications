@@ -1,7 +1,7 @@
 <template>
   <v-row>
-    <v-col v-bind:key="movie.id" v-for="movie in movieData">
-      <v-card class="mx-auto" width="500" height="310">
+    <v-col v-bind:key="movie.id" v-for="movie in movieData.movies">
+      <v-card class="mx-auto" width="500" maxheight="410">
         <div class="d-flex">
           <div>
             <v-card-text>
@@ -17,14 +17,14 @@
           </div>
           <div>
             <img
-              src="./assets/shawshankRedemption.jpg"
+              :src=movie.poster
               style="width:170px; padding-top:10px; padding-right:10px;"
             />
           </div>
         </div>
         <v-card-actions>
-          <v-btn text color="deep-purple accent-4">
-            Learn More
+          <v-btn text >
+           WATCH
           </v-btn>
         </v-card-actions>
       </v-card>

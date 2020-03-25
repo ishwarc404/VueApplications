@@ -1,7 +1,20 @@
 <template>
   <v-app>
     <NavBar />
-    <h1 class="top10text">IMDb Top 10</h1>
+    <br />
+    <div class="d-flex justify-center">
+      <div>
+        <h1 class="top10text">Our favourites on</h1>
+      </div>
+      <div>
+        <img
+          src="./assets/netflix_logo.png"
+          style="width:100px;"
+          alt=""
+        />
+      </div>
+    </div>
+
     <v-container>
       <MovieCards v-bind:movieData="movieData" />
     </v-container>
@@ -24,7 +37,7 @@ export default {
 
   data() {
     return {
-      movieData: database.movies
+      movieData: database
     };
   }
 };
@@ -32,8 +45,10 @@ export default {
 
 <style scoped>
 .top10text {
-  font-family: Helvetica;
-  font-size: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 35px;
+  font-style: inherit;
+  color: black;
   text-align: center;
 }
 </style>
