@@ -11,8 +11,8 @@
         Ratings, Reviews and Where to watch the best movies
       </h1>
       <v-spacer></v-spacer>
-      <v-btn text color="white">MOVIES</v-btn>
-      <v-btn text color="white">ADD MORE</v-btn>
+      <v-btn text color="white" @click="$router.push('/')">MOVIES</v-btn>
+      <v-btn text color="white" @click="$router.push('add')">ADD MORE</v-btn>
     </v-app-bar>
   </div>
 </template>
