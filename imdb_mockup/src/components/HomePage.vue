@@ -37,7 +37,7 @@ export default {
     };
   },
   async mounted() {
-    let output = await axios.get("http://3.218.28.207:5000/readMovieData");
+    let output = await axios.get("http://3.218.28.207/readMovieData");
     this.movieData = output.data;
     // .then(function(response) {
     //   this.movieData = response.data;

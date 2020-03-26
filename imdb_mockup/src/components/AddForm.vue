@@ -43,7 +43,7 @@ export default {
       //lets send all this data to the rest API
       let currentObj = this;
         this.axios
-          .post("http://3.218.28.207:5000/addMovieData", {
+          .post("http://3.218.28.207/addMovieData", {
             movieName: this.movieName,
             yearOfRelease: this.yearOfRelease,
             plot: this.plot,
@@ -60,7 +60,7 @@ export default {
 
   
 
-      //   this.$router.push("/"); //going back to home screen
+      this.$router.push("/"); //going back to home screen
     }
   }
 };

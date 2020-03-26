@@ -10,7 +10,7 @@ CORS(app)
 @app.route("/addMovieData", methods=["POST", "OPTIONS"])
 @cross_origin()
 def addMovieData():
-
+    
     name = request.get_json()["movieName"]
     yearOfRelease = request.get_json()["yearOfRelease"]
     plot = request.get_json()["plot"]
@@ -19,7 +19,9 @@ def addMovieData():
     newMovieData = {"name": name,
                     "yearOfRelease": yearOfRelease, "plot": plot, "poster": poster}
     print("Data received: ", newMovieData)
-
+    if((len(name)==0) or (len(yearOfRelease)==0) or (len(plot)==0) or (len(poster)==0)):
+        abort(400)
+    
     filee = open("db.json", "r+")
     data_read = json.loads(filee.read())
     data_read["movies"].append(newMovieData)
