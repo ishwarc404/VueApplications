@@ -16,7 +16,7 @@ import NavBar from "./NavBar";
 import AddForm from "./AddForm";
 
 export default {
-  name: "AddMovies",
+  name: "AddData",
   components: {
     NavBar,
     AddForm

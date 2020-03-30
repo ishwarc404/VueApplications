@@ -4,7 +4,8 @@ import vuetify from "./plugins/vuetify";
 import VueRouter from "vue-router";
 
 import HomePage from "./components/HomePage.vue"
-import AddMovies from "./components/AddMovies.vue"
+import ActorsPage from "./components/ActorsPage.vue"
+import AddData from "./components/AddData.vue"
 
 //axios for sending and receiving data
 import axios from 'axios'
@@ -29,8 +30,12 @@ const routes = [
     component: HomePage
   },
   {
+    path: "/actors",
+    component: ActorsPage
+  },
+  {
     path: "/add",
-    component: AddMovies
+    component: AddData
   }
 ];
 
