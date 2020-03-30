@@ -6,26 +6,22 @@
           <div>
             <v-card-text>
               <div>Movie Name</div>
-              <p class="display-1 text--primary">
-                {{ movie.name }}
-              </p>
+              <p class="display-1 text--primary">{{ movie.name }}</p>
               <p>Year of Release: {{ movie.yearOfRelease }}</p>
-              <div class="text--primary">
-                {{ movie.plot }}
+              <div class="text--primary">{{ movie.plot }}</div>
+              <br />
+              <div>
+                <b>Actors:</b>
               </div>
+              <p v-bind:key="actor" v-for="actor in movie.actors">{{ actor }}</p>
             </v-card-text>
           </div>
           <div>
-            <img
-              :src=movie.poster
-              style="width:170px; padding-top:10px; padding-right:10px;"
-            />
+            <img :src="movie.poster" style="width:170px; padding-top:10px; padding-right:10px;" />
           </div>
         </div>
         <v-card-actions>
-          <v-btn text >
-           WATCH
-          </v-btn>
+          <v-btn text>WATCH</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>

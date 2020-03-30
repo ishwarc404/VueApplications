@@ -5,6 +5,13 @@
       <v-text-field v-model="movieData.name" label="Movie name" required outlined></v-text-field>
       <v-text-field v-model="movieData.yearOfRelease" label="Year" required outlined></v-text-field>
       <v-textarea v-model="movieData.plot" label="Plot" required outlined></v-textarea>
+      <v-select
+        :items="this.actorList"
+        label="Select actor"
+        v-model="movieData.actors"
+        multiple
+        outlined
+      ></v-select>
       <v-text-field v-model="movieData.poster" label="Poster URL" required outlined></v-text-field>
       <v-btn color class="mr-4" @click="submitData(movieData,'Movie')">Add Movie</v-btn>
     </v-form>
@@ -12,7 +19,13 @@
       <v-text-field v-model="actorData.name" label="Actor name" required outlined></v-text-field>
       <v-text-field v-model="actorData.dateOfBirth" label="Date of Birth" required outlined></v-text-field>
       <v-textarea v-model="actorData.bio" label="Bio" required outlined></v-textarea>
-      <v-select :items="this.movieList" label="Select movie" v-model="actorData.movies" multiple outlined></v-select>
+      <v-select
+        :items="this.movieList"
+        label="Select movie"
+        v-model="actorData.movies"
+        multiple
+        outlined
+      ></v-select>
       <v-btn color class="mr-4" @click="submitData(actorData,'Actor')">Add Actor</v-btn>
     </v-form>
   </div>
@@ -28,17 +41,19 @@ export default {
         name: "",
         yearOfRelease: "",
         plot: "",
-        poster: ""
+        poster: "",
+        actors: []
       },
       actorData: {
         name: "",
         dateOfBirth: "",
         bio: "",
-        movies:[]
+        movies: []
       },
       items: ["Movie", "Actor"],
       DatabaseAccess: null,
-      movieList: []
+      movieList: [],
+      actorList: []
     };
   },
   methods: {
@@ -58,6 +73,9 @@ export default {
     var i;
     for (i = 0; i < movieData.movies.length; i++) {
       this.movieList.push(movieData.movies[i].name);
+    }
+    for (i = 0; i < movieData.actors.length; i++) {
+      this.actorList.push(movieData.actors[i].name);
     }
   }
 };
