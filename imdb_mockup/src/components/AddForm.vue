@@ -12,6 +12,7 @@
       <v-text-field v-model="actorData.name" label="Actor name" required outlined></v-text-field>
       <v-text-field v-model="actorData.dateOfBirth" label="Date of Birth" required outlined></v-text-field>
       <v-textarea v-model="actorData.bio" label="Bio" required outlined></v-textarea>
+      <v-select :items="this.movieList" label="Select movie" v-model="actorData.movies" multiple outlined></v-select>
       <v-btn color class="mr-4" @click="submitData(actorData,'Actor')">Add Actor</v-btn>
     </v-form>
   </div>
@@ -32,10 +33,12 @@ export default {
       actorData: {
         name: "",
         dateOfBirth: "",
-        bio: ""
+        bio: "",
+        movies:[]
       },
       items: ["Movie", "Actor"],
-      DatabaseAccess: null
+      DatabaseAccess: null,
+      movieList: []
     };
   },
   methods: {
@@ -47,6 +50,14 @@ export default {
       if (response === 200) {
         this.$router.push("/"); //going back to home screen
       }
+    }
+  },
+  async created() {
+    let APIobj = new ApiServices(); //calling the api service function
+    let movieData = await APIobj.readFromDatabase();
+    var i;
+    for (i = 0; i < movieData.movies.length; i++) {
+      this.movieList.push(movieData.movies[i].name);
     }
   }
 };

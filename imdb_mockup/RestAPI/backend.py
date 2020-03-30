@@ -30,8 +30,6 @@ def addMovieData():
 @cross_origin()
 def addActorData():
     newActorData = request.get_json()
-    if((len(name)==0)):
-        abort(400)
     
     filee = open("db.json", "r+")
     data_read = json.loads(filee.read())
