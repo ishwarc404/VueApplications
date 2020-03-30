@@ -3,7 +3,7 @@
     <NavBar />
     <br />
     <div class="d-flex justify-center">
-      <h1 class="top10text">Add Movies</h1>
+      <h1 class="top10text">Add</h1>
     </div>
     <br>
     

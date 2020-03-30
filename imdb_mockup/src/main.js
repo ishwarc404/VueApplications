@@ -9,9 +9,12 @@ import AddMovies from "./components/AddMovies.vue"
 //axios for sending and receiving data
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-    
+
+
+
 Vue.use(VueAxios, axios)
    
+// ApiServices.testfunction()
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter); //enabling routing

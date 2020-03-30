@@ -7,7 +7,7 @@
         <h1 class="top10text">Our favourites on</h1>
       </div>
       <div>
-        <img src="./assets/netflix_logo.png" style="width:100px;" alt="" />
+        <img src="./assets/netflix_logo.png" style="width:100px;" alt />
       </div>
     </div>
 
@@ -20,9 +20,8 @@
 <script>
 import NavBar from "./NavBar";
 import MovieCards from "./MovieCards";
-// import database from "./assets/db.json";
-import axios from "axios";
-// let dataBaseReceived = {};
+import ApiServices from "../services/apiServices";
+
 export default {
   name: "HomePage",
   components: {
@@ -32,21 +31,16 @@ export default {
 
   data() {
     return {
-      // dataBaseReceived: {},
+
       movieData: null
     };
   },
   async mounted() {
-    let output = await axios.get("http://3.218.28.207/readMovieData");
-    this.movieData = output.data;
-    // .then(function(response) {
-    //   this.movieData = response.data;
-    //   // console.log(dataBaseReceived);
-    // })
-    // .catch(function(error) {
-    //   // currentObj.output = error;
-    //   console.log(error);
-    // });
+
+    let APIobj = new ApiServices(); //calling the api service function
+    this.movieData = await APIobj.readFromDatabase();
+
+
   }
 };
 </script>
