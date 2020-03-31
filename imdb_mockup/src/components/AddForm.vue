@@ -69,13 +69,14 @@ export default {
   },
   async created() {
     let APIobj = new ApiServices(); //calling the api service function
-    let movieData = await APIobj.readFromDatabase();
+    let Data = await APIobj.readFromDatabase("movies");
     var i;
-    for (i = 0; i < movieData.movies.length; i++) {
-      this.movieList.push(movieData.movies[i].name);
+    for (i = 0; i < Data.length; i++) {
+      this.movieList.push(Data[i].name);
     }
-    for (i = 0; i < movieData.actors.length; i++) {
-      this.actorList.push(movieData.actors[i].name);
+     Data = await APIobj.readFromDatabase("actors");
+    for (i = 0; i < Data.length; i++) {
+      this.actorList.push(Data[i].name);
     }
   }
 };

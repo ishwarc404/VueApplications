@@ -38,7 +38,7 @@ export default {
   async mounted() {
 
     let APIobj = new ApiServices(); //calling the api service function
-    this.movieData = await APIobj.readFromDatabase();
+    this.movieData = await APIobj.readFromDatabase("movies");
 
 
   }

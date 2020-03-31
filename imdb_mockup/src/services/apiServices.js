@@ -3,16 +3,16 @@ import Api from "../api/index";
 let apiInstance = new Api();
 
 export default class ApiServices {
-  async readFromDatabase() {
+  async readFromDatabase(type) {
     let returnedData;
-    returnedData = await apiInstance.instance.get("readMovieData");
+    returnedData = await apiInstance.instance.get(`${type}`);
 
     return returnedData.data;
   }
 
   async writeToDatabase(data, type) {
     let returnedData;
-    returnedData = await apiInstance.instance.post(`add${type}Data`, data);
+    returnedData = await apiInstance.instance.post(`${type}`, data);
 
     return returnedData;
   }

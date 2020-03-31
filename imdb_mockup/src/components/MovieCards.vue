@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col v-bind:key="movie.id" v-for="movie in movieData.movies">
+    <v-col v-bind:key="movie.id" v-for="movie in movieData">
       <v-card class="mx-auto" width="500" maxheight="410">
         <div class="d-flex">
           <div>
@@ -13,7 +13,7 @@
               <div>
                 <b>Actors:</b>
               </div>
-              <p v-bind:key="actor" v-for="actor in movie.actors">{{ actor }}</p>
+              <p v-bind:key="actor" v-for="actor in movie.actors">{{ idConversion(actor) }}</p>
             </v-card-text>
           </div>
           <div>
@@ -29,10 +29,20 @@
 </template>
 
 <script>
+//for id to value translation
+import keyValueConversion from "../services/conversionService";
+let conversionServiceObj = new keyValueConversion();
+
 export default {
   name: "MovieCards",
   components: {},
-  props: ["movieData"]
+  props: ["movieData"],
+  methods: {
+    async idConversion(actorID) {
+      let value = await conversionServiceObj.keyToValue(actorID, "actors");
+      return value;
+    }
+  }
 };
 </script>
 

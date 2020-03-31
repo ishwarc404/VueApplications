@@ -8,8 +8,8 @@
       </div>
     </div>
 
-    <v-container v-if="movieData !== null">
-      <ActorCards v-bind:movieData="movieData"/>
+    <v-container v-if="actorData !== null">
+      <ActorCards v-bind:actorData="actorData"/>
     </v-container>
   </v-app>
 </template>
@@ -28,12 +28,12 @@ export default {
 
   data() {
     return {
-      movieData: null
+      actorData: null
     };
   },
   async mounted() {
     let APIobj = new ApiServices(); //calling the api service function
-    this.movieData = await APIobj.readFromDatabase();
+    this.actorData = await APIobj.readFromDatabase("actors");
   }
 };
 </script>
