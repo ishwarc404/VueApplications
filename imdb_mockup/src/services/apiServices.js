@@ -1,24 +1,18 @@
-import axios from "axios";
+// import axios from "axios";
+import Api from "../api/index";
+let apiInstance = new Api();
 
 export default class ApiServices {
   async readFromDatabase() {
     let returnedData;
-    returnedData = await axios
-      .get("http://127.0.0.1:5000/readMovieData")
-      .then(function(result) {
-        return result.data;
-      });
+    returnedData = await apiInstance.instance.get("readMovieData");
 
-    return returnedData;
+    return returnedData.data;
   }
 
   async writeToDatabase(data, type) {
     let returnedData;
-    returnedData = await axios
-      .post(`http://127.0.0.1:5000/add${type}Data`, data)
-      .then(function() {
-        return 200;
-      });
+    returnedData = await apiInstance.instance.post(`add${type}Data`, data);
 
     return returnedData;
   }
