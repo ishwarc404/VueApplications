@@ -3,7 +3,7 @@ import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import VueRouter from "vue-router";
 
-import definedRoutes from "./services/routes";
+import definedRoutes from "./router/index";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter); //enabling routing

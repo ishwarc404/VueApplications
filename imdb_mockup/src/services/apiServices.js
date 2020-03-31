@@ -1,4 +1,4 @@
-// import axios from "axios";
+
 import Api from "../api/index";
 let apiInstance = new Api();
 
