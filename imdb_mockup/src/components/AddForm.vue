@@ -13,7 +13,7 @@
         outlined
       ></v-select>
       <v-text-field v-model="movieData.poster" label="Poster URL" required outlined></v-text-field>
-      <v-btn color class="mr-4" @click="submitData(movieData,'Movie')">Add Movie</v-btn>
+      <v-btn color class="mr-4" @click="submitData(movieData,'movies')">Add Movie</v-btn>
     </v-form>
     <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Actor'">
       <v-text-field v-model="actorData.name" label="Actor name" required outlined></v-text-field>
@@ -26,13 +26,15 @@
         multiple
         outlined
       ></v-select>
-      <v-btn color class="mr-4" @click="submitData(actorData,'Actor')">Add Actor</v-btn>
+      <v-btn color class="mr-4" @click="submitData(actorData,'actors')">Add Actor</v-btn>
     </v-form>
   </div>
 </template>
 
 <script>
 import ApiServices from "../services/apiServices";
+import keyValueConversion from "../services/conversionService";
+let conversionServiceObj = new keyValueConversion();
 
 export default {
   data() {
@@ -53,13 +55,34 @@ export default {
       items: ["Movie", "Actor"],
       DatabaseAccess: null,
       movieList: [],
-      actorList: []
+      actorList: [],
+      moviesIDReference: null,
+      actorsIDReference: null
     };
   },
   methods: {
     async submitData(data, type) {
       console.log("got it", data);
       //lets send all this data to the rest API service
+      //need to replace names with values in data.type
+      console.log("got it again", type);
+      var i;
+      let tempData = [];
+      if (type == "movies") {
+        for (i = 0; i < data.actors.length; i++) {
+          tempData.push(this.actorsIDReference[data.actors[i]]);
+          data.actors = tempData; //replacing it
+        }
+      } else {
+        for (i = 0; i < data.movies.length; i++) {
+          console.log("MOVIE NAME IS: ", data.movies[i]);
+          console.log("REFERENCE IS: ", this.moviesIDReference);
+          console.log("ID IS:", this.moviesIDReference[data.movies[i]]);
+          tempData.push(this.moviesIDReference[data.movies[i]]);
+          data.movies = tempData; //replacing it
+        }
+      }
+
       let APIobj = new ApiServices();
       let response = await APIobj.writeToDatabase(data, type);
       if (response === 200) {
@@ -74,10 +97,12 @@ export default {
     for (i = 0; i < Data.length; i++) {
       this.movieList.push(Data[i].name);
     }
-     Data = await APIobj.readFromDatabase("actors");
+    Data = await APIobj.readFromDatabase("actors");
     for (i = 0; i < Data.length; i++) {
       this.actorList.push(Data[i].name);
     }
+    this.moviesIDReference = await conversionServiceObj.valueToKey("movies"); //{movieName: movieID}
+    this.actorsIDReference = await conversionServiceObj.valueToKey("actors"); //{actorName: actorID}
   }
 };
 </script>

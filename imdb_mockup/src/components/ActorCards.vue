@@ -15,7 +15,7 @@
                 class="text--primary"
                 v-bind:key="movieID"
                 v-for="movieID in actor.movies"
-              >{{ idConversion(movieID) }}</div>
+              >{{ referenceData[movieID] }}</div>
             </v-card-text>
           </div>
         </div>
@@ -32,11 +32,13 @@ export default {
   name: "MovieCards",
   components: {},
   props: ["actorData"],
-  methods: {
-    async idConversion(movieID) {
-      let value = await conversionServiceObj.keyToValue(movieID, "movies");
-      return value;
-    }
+  data() {
+    return {
+      referenceData: null
+    };
+  },
+  async created() {
+    this.referenceData = await conversionServiceObj.keyToValue("movies");
   }
 };
 </script>
