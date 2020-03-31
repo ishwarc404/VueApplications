@@ -57,7 +57,9 @@ export default {
       movieList: [],
       actorList: [],
       moviesIDReference: null,
-      actorsIDReference: null
+      actorsIDReference: null,
+      moviesCompleteData: null,
+      actorsCompleteData: null
     };
   },
   methods: {
@@ -75,9 +77,9 @@ export default {
         }
       } else {
         for (i = 0; i < data.movies.length; i++) {
-          console.log("MOVIE NAME IS: ", data.movies[i]);
-          console.log("REFERENCE IS: ", this.moviesIDReference);
-          console.log("ID IS:", this.moviesIDReference[data.movies[i]]);
+          // console.log("MOVIE NAME IS: ", data.movies[i]);
+          // console.log("REFERENCE IS: ", this.moviesIDReference);
+          // console.log("ID IS:", this.moviesIDReference[data.movies[i]]);
           tempData.push(this.moviesIDReference[data.movies[i]]);
           data.movies = tempData; //replacing it
         }
@@ -85,21 +87,49 @@ export default {
 
       let APIobj = new ApiServices();
       let response = await APIobj.writeToDatabase(data, type);
-      if (response === 200) {
-        this.$router.push("/"); //going back to home screen
+      console.log(response);
+      if (type == "actors") {
+        //but we also need to update the contrary database
+        //if we add a new actor and select a movie, his name should also be added to the movies database
+        //we need to update each of these movies in the movies db
+        let tempMovie = this.moviesCompleteData.filter(function(specificMovie) {
+          for (i = 0; i < data.movies.length; i++) {
+            if (specificMovie.id == data.movies[i]) {
+              return specificMovie;
+            }
+          }
+        });
+        // tempMovie now store a single dictionary of that movie
+        //response containes the newly added data
+        tempMovie[0]["actors"].push(response.data.id);
+        console.log("MOVIE TO BE UPDATED:", tempMovie[0]);
+        await APIobj.updateDatabase(tempMovie[0], "movies");
+      } else {
+        let tempActor = this.actorsCompleteData.filter(function(specificActor) {
+          for (i = 0; i < data.actors.length; i++) {
+            if (specificActor.id == data.actors[i]) {
+              return specificActor;
+            }
+          }
+        });
+        tempActor[0].movies.push(response.data.id);
+        console.log("ACTOR TO BE UPDATED:", tempActor[0]);
+        await APIobj.updateDatabase(tempActor[0], "actors");
       }
+
+      this.$router.push("/"); //going back to home screen
     }
   },
   async created() {
     let APIobj = new ApiServices(); //calling the api service function
-    let Data = await APIobj.readFromDatabase("movies");
+    this.moviesCompleteData = await APIobj.readFromDatabase("movies");
     var i;
-    for (i = 0; i < Data.length; i++) {
-      this.movieList.push(Data[i].name);
+    for (i = 0; i < this.moviesCompleteData.length; i++) {
+      this.movieList.push(this.moviesCompleteData[i].name);
     }
-    Data = await APIobj.readFromDatabase("actors");
-    for (i = 0; i < Data.length; i++) {
-      this.actorList.push(Data[i].name);
+    this.actorsCompleteData = await APIobj.readFromDatabase("actors");
+    for (i = 0; i < this.actorsCompleteData.length; i++) {
+      this.actorList.push(this.actorsCompleteData[i].name);
     }
     this.moviesIDReference = await conversionServiceObj.valueToKey("movies"); //{movieName: movieID}
     this.actorsIDReference = await conversionServiceObj.valueToKey("actors"); //{actorName: actorID}

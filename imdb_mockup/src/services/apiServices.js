@@ -16,4 +16,11 @@ export default class ApiServices {
 
     return returnedData;
   }
+
+  async updateDatabase(data, type) {
+    let returnedData;
+    returnedData = await apiInstance.instance.put(`${type}/${data.id}`, data);
+
+    return returnedData;
+  }
 }
