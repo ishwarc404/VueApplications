@@ -2,6 +2,7 @@
   <v-app>
     <NavBar />
     <br />
+    <!-- <div class="d-flex justify-center"> replace this -->
     <div class="d-flex justify-center">
       <div>
         <h1 class="top10text">Our favourites on</h1>
@@ -10,7 +11,6 @@
         <img src="./assets/netflix_logo.png" style="width:100px;" alt />
       </div>
     </div>
-
     <v-container v-if="movieData !== null">
       <MovieCards v-bind:movieData="movieData" />
     </v-container>
@@ -31,16 +31,12 @@ export default {
 
   data() {
     return {
-
       movieData: null
     };
   },
   async mounted() {
-
     let APIobj = new ApiServices(); //calling the api service function
     this.movieData = await APIobj.readFromDatabase("movies");
-
-
   }
 };
 </script>

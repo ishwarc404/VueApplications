@@ -8,6 +8,8 @@ import definedRoutes from "./router/index";
 Vue.config.productionTip = false;
 Vue.use(VueRouter); //enabling routing
 
+
+
 const router = new VueRouter({
   routes: definedRoutes,
   mode: "history"

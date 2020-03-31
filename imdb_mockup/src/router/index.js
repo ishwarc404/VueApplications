@@ -9,16 +9,16 @@ const definedRoutes = [
     component: HomePage
   },
   {
-    path: "/",
-    component: HomePage
-  },
-  {
     path: "/actors",
     component: ActorsPage
   },
   {
     path: "/add",
     component: AddData
+  },
+  {
+    path: "/*",
+    component: HomePage
   }
 ];
 

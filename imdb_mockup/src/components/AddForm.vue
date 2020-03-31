@@ -15,6 +15,7 @@
       <v-text-field v-model="movieData.poster" label="Poster URL" required outlined></v-text-field>
       <v-btn color class="mr-4" @click="submitData(movieData,'movies')">Add Movie</v-btn>
     </v-form>
+
     <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Actor'">
       <v-text-field v-model="actorData.name" label="Actor name" required outlined></v-text-field>
       <v-text-field v-model="actorData.dateOfBirth" label="Date of Birth" required outlined></v-text-field>
@@ -28,6 +29,7 @@
       ></v-select>
       <v-btn color class="mr-4" @click="submitData(actorData,'actors')">Add Actor</v-btn>
     </v-form>
+    
   </div>
 </template>
 
@@ -105,16 +107,17 @@ export default {
         console.log("MOVIE TO BE UPDATED:", tempMovie[0]);
         await APIobj.updateDatabase(tempMovie[0], "movies");
       } else {
+        for (i = 0; i < data.actors.length; i++) {
         let tempActor = this.actorsCompleteData.filter(function(specificActor) {
-          for (i = 0; i < data.actors.length; i++) {
             if (specificActor.id == data.actors[i]) {
               return specificActor;
             }
-          }
+          
         });
         tempActor[0].movies.push(response.data.id);
         console.log("ACTOR TO BE UPDATED:", tempActor[0]);
         await APIobj.updateDatabase(tempActor[0], "actors");
+        }
       }
 
       this.$router.push("/"); //going back to home screen

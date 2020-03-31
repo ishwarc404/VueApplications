@@ -8,7 +8,9 @@
       "bio": "I am SRK",
       "movies": [
         1,
-        2
+        2,
+        5,
+        6
       ]
     },
     {
@@ -34,13 +36,22 @@
       ]
     },
     {
-      "name": "Morgan Freema",
-      "dateOfBirth": "1937",
-      "bio": "Morgan Freeman is an American actor and film narrator. Freeman won an Academy Award in 2005 for Best Supporting Actor with Million Dollar Baby and has received Oscar nominations for his performances in Street Smart, Driving Miss Daisy, The Shawshank Redemption and Invictus.\n",
+      "name": "Ajay devgan",
+      "dateOfBirth": "1954",
+      "bio": "I am devgan.",
       "movies": [
-        3
+        5
       ],
       "id": 4
+    },
+    {
+      "name": "Test actor",
+      "dateOfBirth": "1986",
+      "bio": "Test bio",
+      "movies": [
+        4
+      ],
+      "id": 5
     }
   ],
   "producers": [
@@ -121,27 +132,29 @@
       "plot": "In Stanley Kubrick's highly-influential sci-fi film, humanity charts a course for Jupiter with the sentient computer HAL 9000, to understand the discovery of a black monolith affecting human evolution. It's less plot, and more a visual and aural experience.",
       "poster": "https://upload.wikimedia.org/wikipedia/en/7/77/2001_A_Space_Odyssey-Arthur_C._Clarke.jpg",
       "actors": [
-        3
+        3,
+        5
       ],
       "producer": 3
     },
     {
-      "name": "The Bucket List",
-      "yearOfRelease": "2007",
-      "plot": "The Bucket List is a 2007 American buddy comedy-drama film directed and produced by Rob Reiner, written by Justin Zackham, and starring Jack Nicholson and Morgan Freeman.[2] The main plot follows two terminally ill men on their road trip with a wish list of things to do before they \"kick the bucket\".",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/2/20/Bucket_list_poster.jpg",
+      "name": "Kabhi Khushi Kabhie Gham...",
+      "yearOfRelease": "2001",
+      "plot": "Kabhi Khushi Kabhie Gham... (transl. Sometimes Joy, Sometimes Sorrow...), also known as simply K3G, is an Indian Hindi-language drama film written and directed by Karan Johar and produced by Yash Johar. The film stars Amitabh Bachchan, Jaya Bachchan, Shah Rukh Khan, Kajol, Hrithik Roshan and Kareena Kapoor, with Rani Mukerji appearing in an extended special appearance",
+      "poster": "https://upload.wikimedia.org/wikipedia/en/4/4d/Kabhi_Khushi_Kabhie_Gham..._poster.jpg",
       "actors": [
+        1,
         4
       ],
       "id": 5
     },
     {
-      "name": "Hera Pheri",
-      "yearOfRelease": "2000",
-      "plot": "Hera Pheri is a series of Indian comedy films. The first film is directed by Priyadarshan and produced by A.G. Nadiadwala, the second one was directed by Neeraj Vora while third will be directed by Priyadarshan and produced by Firoz Nadiadwala",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/a/a5/Hera_Pheri_2000_poster.jpg",
+      "name": "Test",
+      "yearOfRelease": "2001",
+      "plot": "plot",
+      "poster": "",
       "actors": [
-        2
+        1
       ],
       "id": 6
     }
