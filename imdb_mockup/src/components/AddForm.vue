@@ -144,6 +144,12 @@ export default {
     }
     this.moviesIDReference = await conversionServiceObj.valueToKey("movies"); //{movieName: movieID}
     this.actorsIDReference = await conversionServiceObj.valueToKey("actors"); //{actorName: actorID}
+  },
+  watch: {
+    DatabaseAccess: function() {
+      console.log("Test watcher function for DatabaseAccess variable, new value is:", DatabaseAccess)
+      }
+    }
   }
 };
 </script>
