@@ -147,10 +147,9 @@ export default {
   },
   watch: {
     DatabaseAccess: function() {
-      console.log("Test watcher function for DatabaseAccess variable, new value is:", DatabaseAccess)
+      console.log("Test watcher function for DatabaseAccess variable, new value is:", this.DatabaseAccess)
       }
     }
-  }
 };
 </script>
 
