@@ -11,6 +11,7 @@
         <img src="./assets/netflix_logo.png" style="width:100px;" alt />
       </div>
     </div>
+
     <v-container v-if="movieData !== null">
       <MovieCards v-bind:movieData="movieData" />
     </v-container>

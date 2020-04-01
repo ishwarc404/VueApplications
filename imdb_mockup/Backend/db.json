@@ -45,11 +45,15 @@
       "id": 4
     },
     {
-      "name": "Test actor",
-      "dateOfBirth": "1986",
-      "bio": "Test bio",
+      "name": "Test",
+      "dateOfBirth": "1111-11-11",
+      "bio": "test bio",
       "movies": [
-        4
+        1,
+        2,
+        3,
+        4,
+        5
       ],
       "id": 5
     }
@@ -98,7 +102,9 @@
       "poster": "https://upload.wikimedia.org/wikipedia/en/c/cf/Twelve_monkeysmp.jpg",
       "actors": [
         1,
-        2
+        2,
+        5,
+        5
       ],
       "producer": 1
     },
@@ -109,7 +115,8 @@
       "plot": "Duped into slavery on the account of a job, Steve McQueen's adaptation of a free New York black man's (Chiwetel Ejiofor) 19th-century memoir is an incredible true story, and an important watch.",
       "poster": "https://upload.wikimedia.org/wikipedia/en/5/5c/12_Years_a_Slave_film_poster.jpg",
       "actors": [
-        1
+        1,
+        5
       ],
       "producer": 2
     },
@@ -121,7 +128,8 @@
       "poster": "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
       "actors": [
         2,
-        4
+        4,
+        5
       ],
       "producer": 1
     },
@@ -133,6 +141,7 @@
       "poster": "https://upload.wikimedia.org/wikipedia/en/7/77/2001_A_Space_Odyssey-Arthur_C._Clarke.jpg",
       "actors": [
         3,
+        5,
         5
       ],
       "producer": 3
@@ -140,23 +149,14 @@
     {
       "name": "Kabhi Khushi Kabhie Gham...",
       "yearOfRelease": "2001",
-      "plot": "Kabhi Khushi Kabhie Gham... (transl. Sometimes Joy, Sometimes Sorrow...), also known as simply K3G, is an Indian Hindi-language drama film written and directed by Karan Johar and produced by Yash Johar. The film stars Amitabh Bachchan, Jaya Bachchan, Shah Rukh Khan, Kajol, Hrithik Roshan and Kareena Kapoor, with Rani Mukerji appearing in an extended special appearance",
+      "plot": "Kabhi Khushi Kabhie Gham..,is an Indian Hindi-language drama film written and directed by Karan Johar and produced by Yash Johar. The film stars Amitabh Bachchan with Rani Mukerji appearing in an extended special appearance",
       "poster": "https://upload.wikimedia.org/wikipedia/en/4/4d/Kabhi_Khushi_Kabhie_Gham..._poster.jpg",
       "actors": [
         1,
-        4
+        4,
+        5
       ],
       "id": 5
-    },
-    {
-      "name": "Test",
-      "yearOfRelease": "2001",
-      "plot": "plot",
-      "poster": "",
-      "actors": [
-        1
-      ],
-      "id": 6
     }
   ]
 }

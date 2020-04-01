@@ -1,8 +1,8 @@
 <template>
   <v-row>
     <v-col v-bind:key="actor.id" v-for="actor in actorData">
-      <v-card class="mx-auto" width="300" maxheight="350">
-        <div class="d-flex">
+      <v-card class="mx-start" width="300">
+        <div>
           <div>
             <v-card-text>
               <div>Actor Name</div>

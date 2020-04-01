@@ -3,7 +3,7 @@
     <v-select :items="this.items" label="Select your addition" v-model="DatabaseAccess" solo></v-select>
     <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Movie'">
       <v-text-field v-model="movieData.name" label="Movie name" required outlined></v-text-field>
-      <v-text-field v-model="movieData.yearOfRelease" label="Year" required outlined></v-text-field>
+      <v-text-field v-model="movieData.yearOfRelease" label="Year" type="date" required outlined></v-text-field>
       <v-textarea v-model="movieData.plot" label="Plot" required outlined></v-textarea>
       <v-select
         :items="this.actorList"
@@ -18,7 +18,13 @@
 
     <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Actor'">
       <v-text-field v-model="actorData.name" label="Actor name" required outlined></v-text-field>
-      <v-text-field v-model="actorData.dateOfBirth" label="Date of Birth" required outlined></v-text-field>
+      <v-text-field
+        v-model="actorData.dateOfBirth"
+        label="Date of Birth"
+        type="date"
+        required
+        outlined
+      ></v-text-field>
       <v-textarea v-model="actorData.bio" label="Bio" required outlined></v-textarea>
       <v-select
         :items="this.movieList"
@@ -29,7 +35,6 @@
       ></v-select>
       <v-btn color class="mr-4" @click="submitData(actorData,'actors')">Add Actor</v-btn>
     </v-form>
-    
   </div>
 </template>
 
@@ -75,48 +80,51 @@ export default {
       if (type == "movies") {
         for (i = 0; i < data.actors.length; i++) {
           tempData.push(this.actorsIDReference[data.actors[i]]);
-          data.actors = tempData; //replacing it
         }
+        data.actors = tempData; //replacing it
       } else {
         for (i = 0; i < data.movies.length; i++) {
           // console.log("MOVIE NAME IS: ", data.movies[i]);
           // console.log("REFERENCE IS: ", this.moviesIDReference);
           // console.log("ID IS:", this.moviesIDReference[data.movies[i]]);
           tempData.push(this.moviesIDReference[data.movies[i]]);
-          data.movies = tempData; //replacing it
         }
+        data.movies = tempData; //replacing it
       }
 
       let APIobj = new ApiServices();
       let response = await APIobj.writeToDatabase(data, type);
       console.log(response);
       if (type == "actors") {
-        //but we also need to update the contrary database
-        //if we add a new actor and select a movie, his name should also be added to the movies database
-        //we need to update each of these movies in the movies db
-        let tempMovie = this.moviesCompleteData.filter(function(specificMovie) {
-          for (i = 0; i < data.movies.length; i++) {
+        for (i = 0; i < data.movies.length; i++) {
+          //but we also need to update the contrary database
+          //if we add a new actor and select a movie, his name should also be added to the movies database
+          //we need to update each of these movies in the movies db
+          let tempMovie = this.moviesCompleteData.filter(function(
+            specificMovie
+          ) {
             if (specificMovie.id == data.movies[i]) {
               return specificMovie;
             }
-          }
-        });
-        // tempMovie now store a single dictionary of that movie
-        //response containes the newly added data
-        tempMovie[0]["actors"].push(response.data.id);
-        console.log("MOVIE TO BE UPDATED:", tempMovie[0]);
-        await APIobj.updateDatabase(tempMovie[0], "movies");
+          });
+          // tempMovie now store a single dictionary of that movie
+          //response containes the newly added data
+          tempMovie[0]["actors"].push(response.data.id);
+          console.log("MOVIE TO BE UPDATED:", tempMovie[0]);
+          await APIobj.updateDatabase(tempMovie[0], "movies");
+        }
       } else {
         for (i = 0; i < data.actors.length; i++) {
-        let tempActor = this.actorsCompleteData.filter(function(specificActor) {
+          let tempActor = this.actorsCompleteData.filter(function(
+            specificActor
+          ) {
             if (specificActor.id == data.actors[i]) {
               return specificActor;
             }
-          
-        });
-        tempActor[0].movies.push(response.data.id);
-        console.log("ACTOR TO BE UPDATED:", tempActor[0]);
-        await APIobj.updateDatabase(tempActor[0], "actors");
+          });
+          tempActor[0].movies.push(response.data.id);
+          console.log("ACTOR TO BE UPDATED:", tempActor[0]);
+          await APIobj.updateDatabase(tempActor[0], "actors");
         }
       }
 

@@ -1,23 +1,33 @@
 <template>
   <v-row v-if="referenceData!=null">
     <v-col v-bind:key="movie.id" v-for="movie in movieData">
-      <v-card class="mx-auto" width="500" maxheight="410">
+      <v-card class="mx-start" width="500">
         <div class="d-flex">
           <div>
             <v-card-text>
               <div>Movie Name</div>
               <p class="display-1 text--primary">{{ movie.name }}</p>
+
               <p>Year of Release: {{ movie.yearOfRelease }}</p>
-              <div class="text--primary">{{ movie.plot }}</div>
+              <!-- <div class="movieBio">{{ movie.plot }}</div> -->
+              <v-expansion-panels flat class="expansionPanel">
+                <v-expansion-panel>
+                  <v-expansion-panel-header>Bio:</v-expansion-panel-header>
+                  <v-expansion-panel-content>{{ movie.plot }}</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
               <br />
               <div>
                 <b>Actors:</b>
               </div>
-              <p v-bind:key="actor" v-for="actor in movie.actors">{{ referenceData[actor] }}</p>
+              <span v-bind:key="actor" v-for="actor in movie.actors">{{ referenceData[actor]}} </span>
             </v-card-text>
           </div>
           <div>
-            <img :src="movie.poster" style="width:170px; padding-top:10px; padding-right:10px;" />
+            <img
+              :src="movie.poster"
+              style="width:170px; height:240px; padding-top:10px; padding-right:10px;"
+            />
           </div>
         </div>
         <v-card-actions>
@@ -48,4 +58,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.expansionPanel {
+  width: 300px;
+}
+</style>
