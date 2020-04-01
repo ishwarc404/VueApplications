@@ -132,24 +132,30 @@ export default {
     }
   },
   async created() {
-    let APIobj = new ApiServices(); //calling the api service function
-    this.moviesCompleteData = await APIobj.readFromDatabase("movies");
-    var i;
-    for (i = 0; i < this.moviesCompleteData.length; i++) {
-      this.movieList.push(this.moviesCompleteData[i].name);
-    }
-    this.actorsCompleteData = await APIobj.readFromDatabase("actors");
-    for (i = 0; i < this.actorsCompleteData.length; i++) {
-      this.actorList.push(this.actorsCompleteData[i].name);
-    }
     this.moviesIDReference = await conversionServiceObj.valueToKey("movies"); //{movieName: movieID}
     this.actorsIDReference = await conversionServiceObj.valueToKey("actors"); //{actorName: actorID}
   },
   watch: {
-    DatabaseAccess: function() {
-      console.log("Test watcher function for DatabaseAccess variable, new value is:", this.DatabaseAccess)
+    DatabaseAccess: async function() {
+      console.log(
+        "Test watcher function for DatabaseAccess variable, new value is:",
+        this.DatabaseAccess
+      );
+      let APIobj = new ApiServices(); //calling the api service function
+      if (this.DatabaseAccess == "Actor") {
+        this.moviesCompleteData = await APIobj.readFromDatabase("movies");
+        var i;
+        for (i = 0; i < this.moviesCompleteData.length; i++) {
+          this.movieList.push(this.moviesCompleteData[i].name);
+        }
+      } else {
+        this.actorsCompleteData = await APIobj.readFromDatabase("actors");
+        for (i = 0; i < this.actorsCompleteData.length; i++) {
+          this.actorList.push(this.actorsCompleteData[i].name);
+        }
       }
     }
+  }
 };
 </script>
 

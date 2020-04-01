@@ -35,7 +35,7 @@ export default {
       movieData: null
     };
   },
-  async mounted() {
+  async created() {
     let APIobj = new ApiServices(); //calling the api service function
     this.movieData = await APIobj.readFromDatabase("movies");
   }
