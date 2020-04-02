@@ -1,7 +1,7 @@
 <template>
   <v-row>
-    <v-col v-bind:key="actor.id" v-for="actor in actorData">
-      <v-card class="mx-start" width="300">
+    <v-col class="d-flex justify-content-start" v-bind:key="actor.id" v-for="actor in actorData">
+      <v-card width="300">
         <div>
           <div>
             <v-card-text>

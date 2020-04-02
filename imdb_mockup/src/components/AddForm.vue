@@ -2,7 +2,7 @@
   <div class="formClass">
     <v-select :items="this.items" label="Select your addition" v-model="DatabaseAccess" solo></v-select>
     <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Movie'">
-      <v-text-field v-model="movieData.name" label="Movie name" required outlined></v-text-field>
+      <v-text-field v-model="movieData.name" label="Movie name" v-validate="'required'" outlined></v-text-field>
       <v-text-field v-model="movieData.yearOfRelease" label="Year" type="date" required outlined></v-text-field>
       <v-textarea v-model="movieData.plot" label="Plot" required outlined></v-textarea>
       <v-select
@@ -39,6 +39,10 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
+
 import ApiServices from "../services/apiServices";
 import keyValueConversion from "../services/conversionService";
 let conversionServiceObj = new keyValueConversion();

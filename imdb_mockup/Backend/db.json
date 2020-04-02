@@ -50,17 +50,12 @@
     },
     {
       "name": "Test",
-      "dateOfBirth": "1111-11-11",
-      "bio": "test bio",
+      "dateOfBirth": "12211-02-11",
+      "bio": "Something",
       "movies": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
+        2
       ],
-      "id": 5
+      "id": 7
     }
   ],
   "producers": [
@@ -109,7 +104,8 @@
         1,
         2,
         5,
-        5
+        5,
+        6
       ],
       "producer": 1
     },
@@ -121,7 +117,8 @@
       "poster": "https://upload.wikimedia.org/wikipedia/en/5/5c/12_Years_a_Slave_film_poster.jpg",
       "actors": [
         1,
-        5
+        5,
+        7
       ],
       "producer": 2
     },
@@ -162,20 +159,6 @@
         5
       ],
       "id": 5
-    },
-    {
-      "name": "Test Movie",
-      "yearOfRelease": "1111-11-11",
-      "plot": "some plto",
-      "poster": "",
-      "actors": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "id": 6
     }
   ]
 }
