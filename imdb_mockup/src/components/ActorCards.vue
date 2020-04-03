@@ -1,27 +1,29 @@
 <template>
-  <v-row>
-    <v-col class="d-flex justify-content-start" v-bind:key="actor.id" v-for="actor in actorData">
-      <v-card width="300">
-        <div>
+  <v-container fluid>
+    <v-row>
+      <v-col v-bind:key="actor.id" v-for="actor in actorData">
+        <v-card width="300">
           <div>
-            <v-card-text>
-              <div>Actor Name</div>
-              <p class="display-1 text--primary">{{ actor.name }}</p>
-              <p>Date of Birth: {{ actor.dateOfBirth }}</p>
-              <div>Bio:</div>
-              <div class="text--primary">{{ actor.bio }}</div>
-              <div>Movies:</div>
-              <div
-                class="text--primary"
-                v-bind:key="movieID"
-                v-for="movieID in actor.movies"
-              >{{ referenceData[movieID] }}</div>
-            </v-card-text>
+            <div>
+              <v-card-text>
+                <div>Actor Name</div>
+                <p class="display-1 text--primary">{{ actor.name }}</p>
+                <p>Date of Birth: {{ actor.dateOfBirth }}</p>
+                <div>Bio:</div>
+                <div class="text--primary">{{ actor.bio }}</div>
+                <div>Movies:</div>
+                <div
+                  class="text--primary"
+                  v-bind:key="movieID"
+                  v-for="movieID in actor.movies"
+                >{{ referenceData[movieID] }}</div>
+              </v-card-text>
+            </div>
           </div>
-        </div>
-      </v-card>
-    </v-col>
-  </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -43,4 +45,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  justify-content: space-around;
+}
+</style>

@@ -1,4 +1,5 @@
 <template>
+
   <v-row v-if="referenceData!=null">
     <v-col v-bind:key="movie.id" v-for="movie in movieData">
       <v-card class="mx-start" width="500">
