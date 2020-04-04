@@ -35,13 +35,37 @@
       ></v-select>
       <v-btn color class="mr-4" @click="submitData(actorData,'actors')">Add Actor</v-btn>
     </v-form>
+
+    <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Review'">
+      <v-select
+        :items="this.movieList"
+        label="Select movie"
+        v-model="reviewData.nameOfMovie"
+        outlined
+      ></v-select>
+      <v-textarea v-model="reviewData.review" label="Review" required outlined></v-textarea>
+      <v-continer>
+        Rate this movie
+        <v-spacer></v-spacer>
+        <v-rating
+          v-model="reviewData.rating"
+          color="yellow accent-4"
+          outlined
+          dense
+          half-increments
+          hover
+          size="30"
+        ></v-rating>
+      </v-continer>
+      <br />
+      <v-btn color class="mr-4" @click="submitReview(reviewData,'reviews')">Add Review</v-btn>
+    </v-form>
   </div>
 </template>
 
 <script>
-
-import Vue from 'vue';
-import VeeValidate from 'vee-validate';
+import Vue from "vue";
+import VeeValidate from "vee-validate";
 Vue.use(VeeValidate);
 
 import ApiServices from "../services/apiServices";
@@ -64,7 +88,12 @@ export default {
         bio: "",
         movies: []
       },
-      items: ["Movie", "Actor"],
+      reviewData: {
+        nameOfMovie: "",
+        review: "",
+        rating: null
+      },
+      items: ["Movie", "Actor", "Review"],
       DatabaseAccess: null,
       movieList: [],
       actorList: [],
@@ -75,6 +104,14 @@ export default {
     };
   },
   methods: {
+    async submitReview(data, type) {
+      console.log("Review Data");
+      console.log(data);
+      let APIobj = new ApiServices();
+      await APIobj.writeToDatabase(data, type);
+      this.$router.push("/"); //going back to home screen
+    },
+
     async submitData(data, type) {
       console.log("got it", data);
       //lets send all this data to the rest API service
@@ -147,7 +184,7 @@ export default {
         this.DatabaseAccess
       );
       let APIobj = new ApiServices(); //calling the api service function
-      if (this.DatabaseAccess == "Actor") {
+      if (this.DatabaseAccess == "Actor" || this.DatabaseAccess == "Review") {
         this.moviesCompleteData = await APIobj.readFromDatabase("movies");
         var i;
         for (i = 0; i < this.moviesCompleteData.length; i++) {

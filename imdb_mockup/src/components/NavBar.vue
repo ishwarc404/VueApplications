@@ -13,6 +13,7 @@
       <v-spacer></v-spacer>
       <v-btn text color="white" @click="$router.push('/')">MOVIES</v-btn>
       <v-btn text color="white" @click="$router.push('/actors')">ACTORS</v-btn>
+      <v-btn text color="white" @click="$router.push('/reviews')">REVIEWS</v-btn>
       <v-btn text color="white" @click="$router.push('add')">ADD MORE</v-btn>
     </v-app-bar>
   </div>
