@@ -2,17 +2,61 @@
   <div class="formClass">
     <v-select :items="this.items" label="Select your addition" v-model="DatabaseAccess" solo></v-select>
     <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Movie'">
-      <v-text-field v-model="movieData.name" label="Movie name" v-validate="'required'" outlined></v-text-field>
-      <v-text-field v-model="movieData.yearOfRelease" label="Year" type="date" required outlined></v-text-field>
-      <v-textarea v-model="movieData.plot" label="Plot" required outlined></v-textarea>
+      <v-text-field
+        v-model="movieData.name"
+        label="Movie name"
+        name="name"
+        :error-messages="errors.first('name')"
+        v-validate="'required'"
+        outlined
+      ></v-text-field>
+
+      <v-menu
+        ref="menu"
+        v-model="menu"
+        :close-on-content-click="false"
+        :return-value.sync="date"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="movieData.yearOfRelease"
+            label="Date of Release"
+            outlined
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker v-model="movieData.yearOfRelease" no-title scrollable>
+          <v-spacer></v-spacer>
+          <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+        </v-date-picker>
+      </v-menu>
+      <v-textarea v-model="movieData.plot" label="Plot" auto-grow required outlined></v-textarea>
+
       <v-select
         :items="this.actorList"
         label="Select actor"
         v-model="movieData.actors"
         multiple
         outlined
+        v-validate="'required'"
+        name="Actors"
+        :error-messages="errors.first('Actors')"
       ></v-select>
-      <v-text-field v-model="movieData.poster" label="Poster URL" required outlined></v-text-field>
+
+      <v-text-field
+        v-model="movieData.poster"
+        label="Poster URL"
+        v-validate="'required|url'"
+        name="Pos"
+        :error-messages="errors.first('Pos')"
+        outlined
+      ></v-text-field>
+
       <v-btn color class="mr-4" @click="submitData(movieData,'movies')">Add Movie</v-btn>
     </v-form>
 
@@ -25,7 +69,7 @@
         required
         outlined
       ></v-text-field>
-      <v-textarea v-model="actorData.bio" label="Bio" required outlined></v-textarea>
+      <v-textarea v-model="actorData.bio" label="Bio" auto-grow required outlined></v-textarea>
       <v-select
         :items="this.movieList"
         label="Select movie"
@@ -43,7 +87,7 @@
         v-model="reviewData.nameOfMovie"
         outlined
       ></v-select>
-      <v-textarea v-model="reviewData.review" label="Review" required outlined></v-textarea>
+      <v-textarea v-model="reviewData.review" label="Review" auto-grow required outlined></v-textarea>
       <v-continer>
         Rate this movie
         <v-spacer></v-spacer>
@@ -58,7 +102,7 @@
         ></v-rating>
       </v-continer>
       <br />
-      <v-btn color class="mr-4" @click="submitReview(reviewData,'reviews')">Add Review</v-btn>
+      <v-btn color class="mr-4" @submit="submitReview(reviewData,'reviews')">Add Review</v-btn>
     </v-form>
   </div>
 </template>
@@ -104,15 +148,26 @@ export default {
     };
   },
   methods: {
+    validation() {
+      this.$validator.validateAll();
+      if (this.errors.any()) {
+        alert("Please fill in the form.");
+        return;
+      }
+    },
     async submitReview(data, type) {
-      console.log("Review Data");
-      console.log(data);
       let APIobj = new ApiServices();
       await APIobj.writeToDatabase(data, type);
       this.$router.push("/"); //going back to home screen
     },
 
     async submitData(data, type) {
+      let validateState = await this.$validator.validateAll();
+      //if form is not filled, it will be false
+      if (!validateState) {
+        alert("Please fill in the form.");
+        return;
+      }
       console.log("got it", data);
       //lets send all this data to the rest API service
       //need to replace names with values in data.type
@@ -136,6 +191,7 @@ export default {
 
       let APIobj = new ApiServices();
       let response = await APIobj.writeToDatabase(data, type);
+
       console.log(response);
       if (type == "actors") {
         for (i = 0; i < data.movies.length; i++) {
@@ -202,8 +258,23 @@ export default {
 </script>
 
 <style scoped>
+.error {
+  color: #9f3a38;
+}
+
 .formClass {
   width: 70%;
   padding-left: 30%;
 }
 </style>
+
+
+
+
+1. Componentize
+add form -submit(ishwar, 12/1/12, plot)
+  - movie form --  ishwar, 12/1/12, plot
+               - actor form 
+  - actor form
+
+2.VueX

@@ -13,7 +13,7 @@
               <!-- <div class="movieBio">{{ movie.plot }}</div> -->
               <v-expansion-panels flat class="expansionPanel">
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Bio:</v-expansion-panel-header>
+                  <v-expansion-panel-header>Plot:</v-expansion-panel-header>
                   <v-expansion-panel-content>{{ movie.plot }}</v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
