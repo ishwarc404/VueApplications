@@ -35,6 +35,7 @@
 
     <v-select
       label="Select actor"
+      :items="actorsList"
       v-model="movieData.actors"
       multiple
       outlined
@@ -63,6 +64,7 @@ Vue.use(VeeValidate);
 
 export default {
   name: "movieForm",
+  props:["actorsList"],
   data() {
     return {
       movieData: {
@@ -77,7 +79,7 @@ export default {
   methods: {
     sendDataToParent() {
       alert("Sending to Parent");
-      this.$emit('movieToParent');
+      this.$emit('movieToParent',this.movieData,"movies");
     }
   }
 };

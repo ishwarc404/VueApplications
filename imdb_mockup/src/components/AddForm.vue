@@ -1,57 +1,13 @@
 <template>
   <div class="formClass">
     <v-select :items="this.items" label="Select your addition" v-model="DatabaseAccess" solo></v-select>
-    <v-container
-      v-if="DatabaseAccess!=null && DatabaseAccess=='Movie'"
-      v-on:movieToParent="testFunc"
-    >
-    <movieForm/>
+    <v-container v-if="DatabaseAccess!=null && DatabaseAccess=='Movie'">
+      <movieForm v-on:movieToParent="submitData" :actorsList="this.actorList" />
     </v-container>
 
-    <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Actor'">
-      <v-text-field v-model="actorData.name" label="Actor name" required outlined></v-text-field>
-      <v-text-field
-        v-model="actorData.dateOfBirth"
-        label="Date of Birth"
-        type="date"
-        required
-        outlined
-      ></v-text-field>
-      <v-textarea v-model="actorData.bio" label="Bio" auto-grow required outlined></v-textarea>
-      <v-select
-        :items="this.movieList"
-        label="Select movie"
-        v-model="actorData.movies"
-        multiple
-        outlined
-      ></v-select>
-      <v-btn color class="mr-4" @click="submitData(actorData,'actors')">Add Actor</v-btn>
-    </v-form>
-
-    <v-form ref="form" lazy-validation v-if="DatabaseAccess!=null && DatabaseAccess=='Review'">
-      <v-select
-        :items="this.movieList"
-        label="Select movie"
-        v-model="reviewData.nameOfMovie"
-        outlined
-      ></v-select>
-      <v-textarea v-model="reviewData.review" label="Review" auto-grow required outlined></v-textarea>
-      <v-continer>
-        Rate this movie
-        <v-spacer></v-spacer>
-        <v-rating
-          v-model="reviewData.rating"
-          color="yellow accent-4"
-          outlined
-          dense
-          half-increments
-          hover
-          size="30"
-        ></v-rating>
-      </v-continer>
-      <br />
-      <v-btn color class="mr-4" @submit="submitReview(reviewData,'reviews')">Add Review</v-btn>
-    </v-form>
+    <v-container v-if="DatabaseAccess!=null && DatabaseAccess=='Actor'">
+      <actorForm v-on:actorToParent="submitData" :movieList="this.movieList" />
+    </v-container>
   </div>
 </template>
 
@@ -60,15 +16,17 @@ import Vue from "vue";
 import VeeValidate from "vee-validate";
 Vue.use(VeeValidate);
 
-import movieForm from "./MoviesForm"
+import movieForm from "./MovieForm";
+import actorForm from "./ActorForm";
 
 import ApiServices from "../services/apiServices";
 import keyValueConversion from "../services/conversionService";
 let conversionServiceObj = new keyValueConversion();
 
 export default {
-  components:{
-    movieForm
+  components: {
+    movieForm,
+    actorForm
   },
   data() {
     return {
@@ -90,7 +48,7 @@ export default {
         review: "",
         rating: null
       },
-      items: ["Movie", "Actor", "Review"],
+      items: ["Movie", "Actor"],
       DatabaseAccess: null,
       movieList: [],
       actorList: [],
