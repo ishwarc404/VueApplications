@@ -47,6 +47,20 @@
         6
       ],
       "id": 4
+    },
+    {
+      "name": "new actor",
+      "dateOfBirth": "",
+      "bio": "",
+      "movies": [],
+      "id": 5
+    },
+    {
+      "name": "something11",
+      "dateOfBirth": "2020-04-16",
+      "bio": "",
+      "movies": [],
+      "id": 6
     }
   ],
   "producers": [
