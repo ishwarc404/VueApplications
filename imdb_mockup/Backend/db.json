@@ -47,20 +47,6 @@
         6
       ],
       "id": 4
-    },
-    {
-      "name": "testactor",
-      "dateOfBirth": "",
-      "bio": "",
-      "movies": [],
-      "id": 5
-    },
-    {
-      "name": "test2",
-      "dateOfBirth": "",
-      "bio": "",
-      "movies": [],
-      "id": 6
     }
   ],
   "producers": [

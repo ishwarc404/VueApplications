@@ -1,5 +1,5 @@
 <template>
-  <form action>
+  <form>
     <v-text-field
       v-model="movieData.name"
       label="Movie name"
@@ -32,28 +32,29 @@
       </v-date-picker>
     </v-menu>
     <v-textarea v-model="movieData.plot" label="Plot" auto-grow required outlined></v-textarea>
-   <v-container class="d-flex ">
+    <v-container class="d-flex">
       <v-row>
         <v-col>
-    <v-select
-      label="Select actor"
-      :items="actorList"
-      v-model="movieData.actors"
-      multiple
-      outlined
-      v-validate="'required'"
-      name="Actors"
-      :error-messages="errors.first('Actors')"
-    ></v-select></v-col>
-      &nbsp; &nbsp;
-      <v-col>
-      <v-btn color="secondary" dark v-on:click="dialog=true">ADD ACTORS</v-btn>
-      </v-col>
+          <v-select
+            label="Select actor"
+            :items="actorList"
+            v-model="movieData.actors"
+            multiple
+            outlined
+            v-validate="'required'"
+            name="Actors"
+            :error-messages="errors.first('Actors')"
+          ></v-select>
+        </v-col>&nbsp; &nbsp;
+        <v-col>
+          <v-btn color="secondary" dark v-on:click="dialog=true">ADD ACTORS</v-btn>
+        </v-col>
       </v-row>
     </v-container>
 
     <v-dialog v-model="dialog" height="500" width="600" class="d-flex justidy-content-centre">
-      <v-card width="450">
+      <v-card>
+        <v-card-title class="headline">Add a new actor</v-card-title>
         <v-card-text>
           <actorForm v-on:refreshActors="refreshActors" />
         </v-card-text>
@@ -103,6 +104,10 @@ export default {
   },
   methods: {
     async submitData(data, type) {
+      this.$validator.validateAll();
+      if (this.errors.any()) {
+        return;
+      }
       let submitObj = new submitDataServices();
       await submitObj.SubmitFormData(data, type);
       this.$router.push("/"); //going back to home screen
@@ -120,7 +125,6 @@ export default {
           this.actorList.push(this.actorsCompleteData[i].name);
           this.movieData.actors.push(this.actorsCompleteData[i].name);
         }
-        
       }
     }
   },

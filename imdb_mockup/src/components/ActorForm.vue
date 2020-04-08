@@ -62,9 +62,13 @@ export default {
   },
   methods: {
     async submitData(data, type) {
+      this.$validator.validateAll();
+      if (this.errors.any()) {
+        return;
+      }
       let submitObj = new submitDataServices();
-      let response  = await submitObj.SubmitFormData(data, type);
-      this.$emit("refreshActors",response.data.id);
+      let response = await submitObj.SubmitFormData(data, type);
+      this.$emit("refreshActors", response.data.id);
     }
   },
   async created() {
