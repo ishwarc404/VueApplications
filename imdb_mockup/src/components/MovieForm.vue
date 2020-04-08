@@ -32,7 +32,9 @@
       </v-date-picker>
     </v-menu>
     <v-textarea v-model="movieData.plot" label="Plot" auto-grow required outlined></v-textarea>
-
+   <v-container class="d-flex ">
+      <v-row>
+        <v-col>
     <v-select
       label="Select actor"
       :items="actorList"
@@ -42,13 +44,18 @@
       v-validate="'required'"
       name="Actors"
       :error-messages="errors.first('Actors')"
-    ></v-select>
+    ></v-select></v-col>
+      &nbsp; &nbsp;
+      <v-col>
+      <v-btn color="secondary" dark v-on:click="dialog=true">ADD ACTORS</v-btn>
+      </v-col>
+      </v-row>
+    </v-container>
 
-    <v-btn color="primary" dark v-on:refreshActors="refreshActors" v-on:click="dialog=true">ADD ACTORS</v-btn>
     <v-dialog v-model="dialog" height="500" width="600" class="d-flex justidy-content-centre">
       <v-card width="450">
         <v-card-text>
-          <actorForm />
+          <actorForm v-on:refreshActors="refreshActors" />
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -100,13 +107,20 @@ export default {
       await submitObj.SubmitFormData(data, type);
       this.$router.push("/"); //going back to home screen
     },
-    async refreshActors() {
+    async refreshActors(id) {
+      console.log(" ID RECEIVED IS:", id);
+      this.dialog = false;
       let APIobj = new ApiServices(); //calling the api service function
       this.actorsCompleteData = await APIobj.readFromDatabase("actors");
+
+      //use id to find makes
       var i;
-      this.actorList = [];
       for (i = 0; i < this.actorsCompleteData.length; i++) {
-        this.actorList.push(this.actorsCompleteData[i].name);
+        if (this.actorsCompleteData[i].id == id) {
+          this.actorList.push(this.actorsCompleteData[i].name);
+          this.movieData.actors.push(this.actorsCompleteData[i].name);
+        }
+        
       }
     }
   },

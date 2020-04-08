@@ -11,8 +11,6 @@ export default class submitData {
     let moviesCompleteData = await APIobj.readFromDatabase("movies");
     let actorsCompleteData = await APIobj.readFromDatabase("actors");
 
-    console.log("got it", data);
-    console.log("got it again", type);
     var i;
     let tempData = [];
     if (type == "movies") {
@@ -59,5 +57,7 @@ export default class submitData {
         await APIobj.updateDatabase(tempActor[0], "actors");
       }
     }
+
+    return response;
   }
 }

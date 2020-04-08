@@ -49,15 +49,15 @@
       "id": 4
     },
     {
-      "name": "new actor",
+      "name": "testactor",
       "dateOfBirth": "",
       "bio": "",
       "movies": [],
       "id": 5
     },
     {
-      "name": "something11",
-      "dateOfBirth": "2020-04-16",
+      "name": "test2",
+      "dateOfBirth": "",
       "bio": "",
       "movies": [],
       "id": 6

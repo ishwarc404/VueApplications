@@ -61,10 +61,10 @@ export default {
     };
   },
   methods: {
-    submitData(data, type) {
+    async submitData(data, type) {
       let submitObj = new submitDataServices();
-      submitObj.SubmitFormData(data, type);
-      this.$emit("refreshActors");
+      let response  = await submitObj.SubmitFormData(data, type);
+      this.$emit("refreshActors",response.data.id);
     }
   },
   async created() {
