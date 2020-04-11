@@ -3,6 +3,9 @@ import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import VueRouter from "vue-router";
 
+import store from "./store"
+
+
 import definedRoutes from "./router/index";
 import VeeValidate from "vee-validate";
 
@@ -16,6 +19,7 @@ const router = new VueRouter({
   mode: "history"
 });
 new Vue({
+  store,
   vuetify,
   router,
   render: h => h(App)

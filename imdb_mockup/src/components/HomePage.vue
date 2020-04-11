@@ -12,8 +12,11 @@
       </div>
     </div>
 
+    <v-container> </v-container>
+
+    {{allMovies}}
     <v-container v-if="movieData !== null">
-      <MovieCards v-bind:movieData="movieData" />
+      <MovieCards v-bind:movieData="allMovies" />
     </v-container>
   </v-app>
 </template>
@@ -23,12 +26,15 @@ import NavBar from "./NavBar";
 import MovieCards from "./MovieCards";
 import ApiServices from "../services/apiServices";
 
+import {mapGetters} from "vuex";
+
 export default {
   name: "HomePage",
   components: {
     NavBar,
     MovieCards
   },
+  computed:mapGetters(["allMovies"]),
 
   data() {
     return {
