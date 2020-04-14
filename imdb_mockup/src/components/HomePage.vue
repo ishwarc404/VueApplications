@@ -13,8 +13,8 @@
     </div>
 
     <v-container>
-      <v-btn @click="filter()">Filter</v-btn>
-      <v-btn @click="unfilter()">Unfilter</v-btn>
+      <v-text-field v-model="search" label="Search" single-line outlined="" v-on:input="filter"></v-text-field>
+      <br/>
     </v-container>
 
     <v-container v-if="movieData !== null">
@@ -40,13 +40,14 @@ export default {
 
   data() {
     return {
+      search:null,
       movieData: null
     };
   },
   methods: {
-    ...mapActions(["fetchMovies", "filterFunction","unfilterFunction"]),
+    ...mapActions(["fetchMovies", "filterFunction", "unfilterFunction"]),
     filter() {
-      this.filterFunction();
+      this.filterFunction(this.search);
     },
     unfilter() {
       this.unfilterFunction();
@@ -67,5 +68,8 @@ export default {
   font-style: inherit;
   color: black;
   text-align: center;
+}
+.v-text-field{
+      width: 400px;
 }
 </style>

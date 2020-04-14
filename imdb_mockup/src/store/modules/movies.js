@@ -15,11 +15,11 @@ const actions = {
     commit("setMovies", movieData);
     commit("original", movieData);
   },
-  filterFunction({ commit }) {
+  filterFunction({ commit },value) {
     let movieData = state.original;
     let filteredData = [];
     for(var i=0;i<movieData.length;i++){
-      if(movieData[i].name!="Yeh Jawaani Hai Deewani"){
+      if(movieData[i].name.includes(value)||movieData[i].plot.includes(value)||movieData[i].actors.includes(value)||movieData[i].yearOfRelease.includes(value)){
         filteredData.push(movieData[i]);
       }
     }
