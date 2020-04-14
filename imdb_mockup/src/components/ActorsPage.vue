@@ -9,8 +9,9 @@
     </div>
 
     <v-container v-if="actorData !== null">
-      <ActorCards v-bind:actorData="actorData"/>
+      <ActorCards v-bind:actorData="allActors"/>
     </v-container>
+
   </v-app>
 </template>
 
@@ -18,9 +19,14 @@
 import NavBar from "./NavBar";
 import ActorCards from "./ActorCards";
 import ApiServices from "../services/apiServices";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "HomePage",
+    methods: {
+    ...mapActions(["fetchActors"])
+  },
+  computed: mapGetters(["allActors"]),
   components: {
     NavBar,
     ActorCards
@@ -32,6 +38,8 @@ export default {
     };
   },
   async mounted() {
+    this.fetchActors();
+   
     let APIobj = new ApiServices(); //calling the api service function
     this.actorData = await APIobj.readFromDatabase("actors");
   }

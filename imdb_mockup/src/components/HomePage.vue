@@ -12,9 +12,11 @@
       </div>
     </div>
 
-    <v-container> </v-container>
+    <v-container>
+      <v-btn @click="filter()">Filter</v-btn>
+      <v-btn @click="unfilter()">Unfilter</v-btn>
+    </v-container>
 
-    {{allMovies}}
     <v-container v-if="movieData !== null">
       <MovieCards v-bind:movieData="allMovies" />
     </v-container>
@@ -26,7 +28,7 @@ import NavBar from "./NavBar";
 import MovieCards from "./MovieCards";
 import ApiServices from "../services/apiServices";
 
-import {mapGetters} from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "HomePage",
@@ -34,14 +36,24 @@ export default {
     NavBar,
     MovieCards
   },
-  computed:mapGetters(["allMovies"]),
+  computed: mapGetters(["allMovies"]),
 
   data() {
     return {
       movieData: null
     };
   },
+  methods: {
+    ...mapActions(["fetchMovies", "filterFunction","unfilterFunction"]),
+    filter() {
+      this.filterFunction();
+    },
+    unfilter() {
+      this.unfilterFunction();
+    }
+  },
   async created() {
+    this.fetchMovies();
     let APIobj = new ApiServices(); //calling the api service function
     this.movieData = await APIobj.readFromDatabase("movies");
   }
