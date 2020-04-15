@@ -2,11 +2,11 @@
   <div class="formClass">
     <v-select :items="this.items" label="Select your addition" v-model="DatabaseAccess" solo></v-select>
     <v-container v-if="DatabaseAccess!=null && DatabaseAccess=='Movie'">
-      <movieForm v-on:movieToParent="submitData" />
+      <movieForm/>
     </v-container>
 
     <v-container v-if="DatabaseAccess!=null && DatabaseAccess=='Actor'">
-      <actorForm v-on:actorToParent="submitData" />
+      <actorForm/>
     </v-container>
   </div>
 </template>

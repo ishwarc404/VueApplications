@@ -10,8 +10,6 @@
     ></v-text-field>
 
     <v-menu
-      :close-on-content-click="false"
-      :return-value.sync="date"
       transition="scale-transition"
       offset-y
       min-width="290px"
@@ -26,9 +24,6 @@
         ></v-text-field>
       </template>
       <v-date-picker v-model="movieData.yearOfRelease" no-title scrollable>
-        <v-spacer></v-spacer>
-        <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-        <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
       </v-date-picker>
     </v-menu>
     <v-textarea v-model="movieData.plot" label="Plot" auto-grow required outlined></v-textarea>

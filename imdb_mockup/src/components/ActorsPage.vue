@@ -8,10 +8,14 @@
       </div>
     </div>
 
-    <v-container v-if="actorData !== null">
-      <ActorCards v-bind:actorData="allActors"/>
+    <v-container>
+      <v-text-field v-model="search" label="Search" single-line outlined v-on:input="filter"></v-text-field>
+      <br />
     </v-container>
 
+    <v-container v-if="actorData !== null">
+      <ActorCards v-bind:actorData="allActors" />
+    </v-container>
   </v-app>
 </template>
 
@@ -23,8 +27,11 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "HomePage",
-    methods: {
-    ...mapActions(["fetchActors"])
+  methods: {
+    ...mapActions(["fetchActors", "filterActorFunction"]),
+    filter() {
+      this.filterActorFunction(this.search);
+    }
   },
   computed: mapGetters(["allActors"]),
   components: {
@@ -34,12 +41,13 @@ export default {
 
   data() {
     return {
-      actorData: null
+      actorData: null,
+      search: ""
     };
   },
   async mounted() {
     this.fetchActors();
-   
+
     let APIobj = new ApiServices(); //calling the api service function
     this.actorData = await APIobj.readFromDatabase("actors");
   }
@@ -53,5 +61,8 @@ export default {
   font-style: inherit;
   color: black;
   text-align: center;
+}
+.v-text-field{
+      width: 400px;
 }
 </style>
