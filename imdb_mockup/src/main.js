@@ -7,10 +7,10 @@ import store from "./store/index"
 
 
 import definedRoutes from "./router/index";
-import VeeValidate from "vee-validate";
+
 
 Vue.config.productionTip = false;
-Vue.use(VueRouter,VeeValidate); //enabling routing
+Vue.use(VueRouter); //enabling routing
 // Register it globally
 
 const router = new VueRouter({

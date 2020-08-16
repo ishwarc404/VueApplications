@@ -11,11 +11,11 @@
         <img src="./assets/netflix_logo.png" style="width:100px;" alt />
       </div>
     </div>
-
     <v-container>
-      <v-text-field v-model="search" label="Search" single-line outlined="" v-on:input="filter"></v-text-field>
-      <br/>
+      <v-text-field v-model="search" label="Search" single-line outlined v-on:input="filter"></v-text-field>
+      <br />
     </v-container>
+    <AdPreviewTool></AdPreviewTool>
 
     <v-container v-if="movieData !== null">
       <MovieCards v-bind:movieData="allMovies" />
@@ -28,19 +28,24 @@ import NavBar from "./NavBar";
 import MovieCards from "./MovieCards";
 import ApiServices from "../services/apiServices";
 
+import Vue from "vue";
+import AdPreviewTool from "../../node_modules/aptv1/src"
+Vue.use(AdPreviewTool);
+
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "HomePage",
   components: {
     NavBar,
-    MovieCards
+    MovieCards,
+    
   },
   computed: mapGetters(["allMovies"]),
 
   data() {
     return {
-      search:null,
+      search: null,
       movieData: null
     };
   },
@@ -69,7 +74,7 @@ export default {
   color: black;
   text-align: center;
 }
-.v-text-field{
-      width: 400px;
+.v-text-field {
+  width: 400px;
 }
 </style>
